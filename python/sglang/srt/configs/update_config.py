@@ -175,7 +175,7 @@ def adjust_config_with_unaligned_cpu_tp(
         if att_heads > 0 and att_heads % tp_size != 0:
             from sglang.srt.layers.vocab_parallel_embedding import pad_vocab_size
 
-            pad_size = get_num_heads_padding_size(tp_size, weight_block_size)
+            pad_size = get_num_heads_padding_size(tp_size, weight_block_size, vision_cfg_obj.head_dim)
             padded_att_heads = pad_vocab_size(att_heads, pad_size)
             if hasattr(vision_cfg_obj, "num_attention_heads"):
                 vision_cfg_obj.padded_num_attention_heads = padded_att_heads
