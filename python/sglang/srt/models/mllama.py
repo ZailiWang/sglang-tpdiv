@@ -521,6 +521,8 @@ class MllamaTextCrossAttention(nn.Module):
         self.dropout = config.dropout
         self.hidden_size = config.hidden_size
         self.head_dim = config.hidden_size // self.num_heads
+        if hasattr(config, "head_dim"):
+            self.head_dim = config.head_dim
         self.layer_id = layer_id
         self.num_key_value_groups = self.num_heads // self.num_key_value_heads
         self.q_local_size = self.num_local_heads * self.head_dim
